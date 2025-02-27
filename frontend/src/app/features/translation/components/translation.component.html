@@ -1,0 +1,82 @@
+<!-- <h1>Real-Time Translation</h1>
+    <textarea [(ngModel)]="textToTranslate"></textarea>
+    <select [(ngModel)]="selectedLanguage">
+        @for (lang of languages; track $index) {
+      <option [value]="lang.code">{{ lang.language }}</option>
+    }
+
+    </select>
+    <button (click)="translate()">Translate</button>
+    <p>Translation: {{ translatedText }}</p> -->
+
+
+<div class="container mr-t-2rem mr-b-2rem">
+    <div class="card text-center dashboard-card">
+        <div class="card-header">
+            <h4>Translate</h4>
+        </div>
+        <div class="card-body">
+            <div class="container mt-4 overflow-auto">
+                @if (packageList.length) {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @for (item of tableData; track $index) {
+                            <th scope="col" class="text-nowrap">{{item.name}}</th>
+                            }
+                            <th class="text-nowrap">Translate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (list of packageList; track $index; let index = $index) {
+                        <tr>
+                            @for (item of tableData; track $index) {
+                            <td scope="row" class="text-nowrap">{{item.cell(list)}}</td>
+                            }
+                            <td class="text-nowrap">
+                                <button class="btn btn-success" (click)="translate(list)">
+                                    T
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                }@else {
+                <h2 class="text-center">No Packages Found</h2>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="language" class="form-label flt-lft"><b>Target Language</b></label>
+                <select class="form-select" aria-label="Select Target language" id="language" [(ngModel)]="selectedLanguage">
+                    @for (lang of languages; track $index) {
+                    <option [value]="lang.code">{{lang.language}}</option>
+                    }
+                </select>
+            </div> 
+
+            <div>
+                @if (translationList.length) {
+                    <table class="table border">
+                        <thead>
+                            <tr>
+                                @for (item of translateTableData; track $index) {
+                                <th scope="col" class="text-nowrap">{{item.name}}</th>
+                                } 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (list of translationList; track $index; let index = $index) {
+                            <tr>
+                                @for (item of translateTableData; track $index) {
+                                <td scope="row" class="text-nowrap">{{item.cell(list)}}</td>
+                                }
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    }
+            </div>
+        </div>
+    </div>
+</div>

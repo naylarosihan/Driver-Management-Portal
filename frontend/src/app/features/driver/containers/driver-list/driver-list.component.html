@@ -1,0 +1,91 @@
+<div class="container mt-4 overflow-auto">
+    @if (driverList.length) {
+        <table class="table">
+            <thead>
+              <tr>
+                @for (item of tableData; track $index) {
+                    <th scope="col" class="text-nowrap">{{item.name}}</th>
+                }
+                <th class="text-nowrap">Delete</th>
+                <th class="text-nowrap">Update</th>
+                <th class="text-nowrap">Packages</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (list of driverList; track $index; let index = $index) {
+                    <tr>
+                        @for (item of tableData; track $index) {
+                            @if (item.field !== 'driver_isActive') {
+                                <td scope="row" class="text-nowrap">{{list[item.field]}}</td>
+                            }@else {
+                                <td scope="row" class="text-nowrap">
+                                    @if (list[item.field]) {
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                    }@else {
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                    }
+                                </td>
+                            }
+                        }
+                        <td class="text-nowrap">
+                            <button class="btn btn-danger" (click)="deleteDriver(list)">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                        <td class="text-nowrap" (click)="updateDriver(list)">
+                            <button class="btn btn-success">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td class="text-nowrap">
+                            <button class="btn btn-danger" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + index" aria-expanded="true" [attr.aria-controls]="'collapse' + index">
+                                <i class="bi bi-question-circle"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" class="p-0">
+                            @if (list.assigned_packages.length) {
+                                <div  [id]="'collapse' + index" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <table class="table table-bordered delivery-table">
+                                        <thead>
+                                            <tr>
+                                              <th class="text-nowrap text-center">Title</th>
+                                              <th class="text-nowrap text-center">Destination</th>
+                                              <th class="text-nowrap text-center">Description</th>
+                                              <th class="text-nowrap text-center">Allocated</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            @for (package of list.assigned_packages; track $index) {
+                                                <tr>
+                                                    <td class="text-center">{{package.package_title}}</td>
+                                                    <td class="text-center">{{package.package_destination}}</td>
+                                                    <td class="text-center">{{package.package_description}}</td>
+                                                    <td scope="row" class="text-nowrap text-center">
+                                                        @if (package.isAllocated) {
+                                                            <i class="bi bi-check-circle-fill text-success"></i>
+                                                        }@else {
+                                                            <i class="bi bi-x-circle-fill text-danger"></i>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                          </tbody>
+    
+                                    </table>
+                                  </div>
+                            }@else {
+                                <div [id]="'collapse' + index" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <h2 class="text-center">No Packages Found</h2>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }@else {
+        <h2 class="text-center">No Drivers Found</h2>
+    }
+</div>

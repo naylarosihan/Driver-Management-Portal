@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Package</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-light p-3 mb-3 d-flex justify-content-between align-items-center">
+        <a href="/33173273/Nayla/api/v1" class="btn btn-secondary">Home</a>
+        <h1 class="text-center flex-grow-1 m-0">Add Package</h1>
+        <div style="width: 86px;"> 
+        </div>
+    </header>
+    <div class="container mt-auto">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <form action="/33173273/Nayla/api/v1/packages/add" method="POST" class="card p-4">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" id="title" name="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea id="description" name="description" class="form-control" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Weight:</label>
+                        <input type="number" id="weight" name="weight" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="destination" class="form-label">Destination:</label>
+                        <input type="text" id="destination" name="destination" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="driverID" class="form-label">Driver ID:</label>
+                        <select id="driverID" name="driverID" class="form-select" required>
+                            <% drivers.forEach(function(driver) { %>
+                                <option value="<%= driver._id %>"><%= driver.driver_name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" id="isAllocated" name="isAllocated" class="form-check-input">
+                        <label for="isAllocated" class="form-check-label">Is Allocated?</label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-auto bg-light text-center py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Nayla</h5>
+                    <h5>Rosihan</h5>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>About Us</h5>
+                    <p>Our company creates charming, user-friendly web applications that make your digital experience delightful. Dedicated to turning your ideas into beautifully crafted, powerful solutions that bring a little joy to your day.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: nros0021@student.monash.edu</p>
+                    <p>Student ID: 33173273</p>
+                    <p>Phone: +61422328544</p>
+                    <p>Address: Monash University</p>
+                </div>
+            </div>
+            <hr>
+            <p class="text-muted">&copy; Driver Management Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

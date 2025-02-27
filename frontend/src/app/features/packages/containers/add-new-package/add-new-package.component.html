@@ -1,0 +1,59 @@
+<div class="container"> 
+    <div class="card driver-form">
+        <div class="card-body">
+            <form [formGroup]="addNewPackageForm" (ngSubmit)="submitPackage()">
+                <div class="mb-3">
+                    <label for="titleInputEmail1" class="form-label">Title</label>
+                    <input type="email" class="form-control" id="titleInputEmail1" aria-describedby="nameHelp" required formControlName="package_title">
+                    @if (addNewPackageForm.get('package_title')!.errors && addNewPackageForm.get('package_title')!.errors!['required'] && submitted) {
+                        <div class="invalid-feedback d-block">
+                            Please enter a Title.
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionInput1" class="form-label">Description</label>
+                    <textarea class="form-control" id="descriptionInput1" formControlName="package_description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="weightInput1" class="form-label">Weight</label>
+                    <input type="number" class="form-control" id="weightInput1" required formControlName="package_weight">
+                    @if (addNewPackageForm.get('package_weight')!.errors && addNewPackageForm.get('package_weight')!.errors!['required'] && submitted){
+                        <div class="invalid-feedback d-block">
+                            Please enter a weight.
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="destinationInput1" class="form-label">Destination</label>
+                    <input type="text" class="form-control" id="destinationInput1" required formControlName="package_destination">
+                    @if (addNewPackageForm.get('package_destination')!.errors && addNewPackageForm.get('package_destination')!.errors!['required'] && submitted){
+                        <div class="invalid-feedback d-block">
+                            Please enter a destination.
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="driverIdInput1" class="form-label">Driver Id</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="driverID">
+                        @for (item of (loadDriverName$ | async); track $index) {
+                            <option [value]="item.id">{{item.name}}</option>
+                        }
+                      </select>
+                    @if (addNewPackageForm.get('driverID')!.errors && addNewPackageForm.get('driverID')!.errors!['required'] && submitted){
+                        <div class="invalid-feedback d-block">
+                            Please enter a Driver Id.
+                        </div>
+                    }
+                </div>
+                <div class="form-check mb-5">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="isAllocated">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Is Allocated
+                    </label>
+                  </div>
+                <button type="submit" class="btn btn-primary" [disabled]="addNewPackageForm.invalid">Submit</button>
+            </form>
+        </div>
+      </div>
+</div>

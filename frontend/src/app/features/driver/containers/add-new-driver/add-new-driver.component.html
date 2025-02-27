@@ -1,0 +1,40 @@
+<div class="container"> 
+    <div class="card driver-form">
+        <div class="card-body">
+            <form [formGroup]="addDriverForm" (ngSubmit)="submitForm()">
+                <div class="mb-3">
+                    <label for="nameInputEmail1" class="form-label">Name</label>
+                    <input type="email" class="form-control" id="nameInputEmail1" aria-describedby="nameHelp" formControlName="driver_name" required>
+                    @if (addDriverForm.get('driver_name')!.errors && addDriverForm.get('driver_name')!.errors!['required'] && submitted) {
+                        <div class="invalid-feedback d-block">
+                            Please enter a name.
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="departmentInput1" class="form-label">Department</label>
+                    <input type="text" class="form-control" id="departmentInput1" formControlName="driver_department" required>
+                    @if (addDriverForm.get('driver_department')!.errors && addDriverForm.get('driver_department')!.errors!['required'] && submitted){
+                        <div class="invalid-feedback d-block">
+                            Please enter a department.
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="licenseInput1" class="form-label">License</label>
+                    <input type="text" class="form-control" id="licenseInput1" formControlName="driver_license" required>
+                    @if (addDriverForm.get('driver_license')!.errors && addDriverForm.get('driver_license')!.errors!['required'] && submitted){
+                        <div class="invalid-feedback d-block">
+                            Please enter a license.
+                        </div>
+                    }
+                </div>
+                <div class="form-check form-switch mb-5">
+                    <input class="form-check-input" type="checkbox" role="switch" id="isActiveSwitchCheckChecked" checked formControlName="driver_isActive">
+                    <label class="form-check-label" for="isActiveSwitchCheckChecked">Is Active ?</label>
+                  </div>
+                <button type="submit" class="btn btn-primary" [disabled]="addDriverForm.invalid">Submit</button>
+            </form>
+        </div>
+      </div>
+</div>

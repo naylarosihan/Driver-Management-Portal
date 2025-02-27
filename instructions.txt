@@ -1,0 +1,11 @@
+For backend(nodejs):
+npm i
+npm run test
+
+For frontend(angular):
+npm i
+ng serve
+
+Please run this command for run
+
+

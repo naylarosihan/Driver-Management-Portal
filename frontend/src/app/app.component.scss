@@ -1,0 +1,9 @@
+.root-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.router-container{
+    display: block;
+    flex: 1 1 auto;
+}

@@ -1,0 +1,89 @@
+<div class="container mt-4 overflow-auto">
+    @if (packageList.length) {
+        <table class="table">
+            <thead>
+              <tr>
+                @for (item of tableData; track $index) {
+                    <th scope="col" class="text-nowrap">{{item.name}}</th>
+                }
+                <th class="text-nowrap">Delete</th>
+                <th class="text-nowrap">Update</th>
+                <th class="text-nowrap">Packages</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (list of packageList; track $index; let index = $index) {
+                    <tr>
+                        @for (item of tableData; track $index) {
+                            @if (item.field !== 'isAllocated') {
+                                <td scope="row" class="text-nowrap">{{item.cell(list)}}</td>
+                            }@else {
+                                <td scope="row" class="text-nowrap text-center">
+                                    @if (list.isAllocated) {
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                    }@else {
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                    }
+                                </td>
+                            }
+                        }
+                        <td class="text-nowrap">
+                            <button class="btn btn-danger" (click)="deletePackage(list)">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                        <td class="text-nowrap">
+                            <button class="btn btn-success" (click)="updatePackage(list)">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                        <td class="text-nowrap">
+                            <button class="btn btn-danger" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + index" aria-expanded="true" [attr.aria-controls]="'collapse' + index">
+                                <i class="bi bi-question-circle"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" class="p-0">
+                            @if (list.driverID !== null) {
+                                <div [id]="'collapse' + index" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <table class="table table-bordered delivery-table">
+                                        <thead>
+                                            <tr>
+                                              <th class="text-nowrap text-center">Name</th>
+                                              <th class="text-nowrap text-center">Department</th>
+                                              <th class="text-nowrap text-center">License</th>
+                                              <th class="text-nowrap text-center">is Active ?</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                                <td class="text-center">{{list.driverID.driver_name}}</td>
+                                                <td class="text-center">{{list.driverID.driver_department}}</td>
+                                                <td class="text-center">{{list.driverID.driver_license}}</td>
+                                                <td scope="row" class="text-nowrap text-center">
+                                                    @if (list.driverID.driver_isActive) {
+                                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                                    }@else {
+                                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                                    }
+                                                </td>
+                                            </tr>
+                                          </tbody>
+    
+                                    </table>
+                                </div>
+                            }@else {
+                                <div [id]="'collapse' + index" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <h2 class="text-center">No Packages Found</h2>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }@else {
+        <h2 class="text-center">No Packages Found</h2>
+    }
+</div>
